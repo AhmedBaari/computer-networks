@@ -1,5 +1,3 @@
-// ref: https://github.com/mansimarkaur/TCP-file-transfer
-
 import java.io.*;
 import java.net.*;
 import java.lang.*;
