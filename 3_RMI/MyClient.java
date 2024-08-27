@@ -1,6 +1,5 @@
 import java.net.*;
 import java.rmi.*;
-import java.util.Scanner;
 
 public class MyClient
 {
@@ -14,20 +13,7 @@ public class MyClient
 			
 		int d1=2000,d2=500;
 
-		//System.out.println("Addition: "+asif.add(d1,d2));
-
-		/////
-		while(true) {
-			Scanner scanIn = new Scanner(System.in);
-			System.out.print("Client: ");
-			String myMessage = scanIn.nextLine();
-
-			System.out.print("Server: ");
-			String serverMessage = asif.sendChatMessage(myMessage);
-			System.out.println(serverMessage);
-			//scanIn.close(); 
-		}
-		/////
+		System.out.println("Addition: "+asif.add(d1,d2));
 
 		}
 		catch(Exception e)
