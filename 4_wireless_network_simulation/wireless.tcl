@@ -49,7 +49,8 @@ set channel2 [new $val(chan)]
 set channel3 [new $val(chan)]
 
 #configure the node
-$ns node-config -adhocRouting $val(rp) \
+$ns node-config \
+  -adhocRouting $val(rp) \
   -llType $val(ll) \
   -macType $val(mac) \
   -ifqType $val(ifq) \
