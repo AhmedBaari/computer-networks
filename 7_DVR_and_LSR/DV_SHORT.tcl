@@ -16,13 +16,16 @@ for {set i 0} {$i < 7} {incr i} {
     $ns duplex-link $node($i) $node($j) 1.5Mb 10ms DropTail
 }
 
-set tcp2 [new Agent/TCP]
-$ns attach-agent $node(0) $tcp2
-set sink2 [new Agent/TCPSink]
-$ns attach-agent $node(3) $sink2
-$ns connect $tcp2 $sink2
-set ftp2 [new Application/FTP]
-$ftp2 attach-agent $tcp2
+set tcp [new Agent/TCP]
+$ns attach-agent $node(0) $tcp
+
+set sink [new Agent/TCPSink]
+$ns attach-agent $node(3) $sink
+
+$ns connect $tcp $sink
+
+set ftp [new Application/FTP]
+$ftp attach-agent $tcp
 
 proc finish {} {
     global ns tf nf
@@ -33,10 +36,10 @@ proc finish {} {
     exit 0
 }
 
-$ns at 0.5 "$ftp2 start"
+$ns at 0.5 "$ftp start"
 $ns rtmodel-at 2.0 down $node(2) $node(3)
 $ns rtmodel-at 3.0 up $node(2) $node(3)
-$ns at 4.9 "$ftp2 stop"
+$ns at 4.9 "$ftp stop"
 $ns at 5.0 "finish"
 
 $ns run
