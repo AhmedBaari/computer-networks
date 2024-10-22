@@ -21,9 +21,17 @@ $topo load_flatgrid 800 800
 create-god $val(nn)
 set chan_1 [new Channel/WirelessChannel]
 
-$ns node-config -adhocRouting $val(rp) -llType $val(ll) -macType $val(mac) \
--ifqType $val(ifq) -ifqLen $val(ifqlen) -antType $val(ant) -propType $val(prop) \
--phyType $val(netif) -topoInstance $topo -channel $chan_1
+$ns node-config -adhocRouting $val(rp) \
+                -macType $val(mac) \
+                -channel $chan_1 \
+                -propType $val(prop) \
+                -phyType $val(netif) \
+                -antType $val(ant) \
+                -llType $val(ll) \
+                -ifqType $val(ifq) \
+                -ifqLen $val(ifqlen) \
+                -topoInstance $topo \
+                
 
 proc finish {} {
     global ns f namtrace
