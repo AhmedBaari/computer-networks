@@ -4,7 +4,7 @@ import java.util.*;
 
 public class DHCPServer {
     private static final int SERVER_PORT = 4900;
-    private static Map<String, String> ipAllocations = new HashMap<>();
+    private static List<String> availableIpAddresses = new ArrayList<>();
 
     public static void main(String[] args) {
         initializeIpAddresses();
