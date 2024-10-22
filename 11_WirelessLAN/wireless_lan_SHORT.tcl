@@ -7,7 +7,7 @@ set val(ant) Antenna/OmniAntenna
 set val(ll) LL
 set val(ifq) Queue/DropTail/PriQueue
 set val(ifqlen) 50
-#set val(mac) Mac/802_11
+set val(mac) Mac/802_11
 #set val(nn) 15
 #set val(rp) AODV
 

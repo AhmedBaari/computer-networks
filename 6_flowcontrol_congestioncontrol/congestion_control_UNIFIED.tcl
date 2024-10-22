@@ -24,18 +24,6 @@ proc finish {} {
     exit 0
 }
 
-# record bandwidth and throughput
-proc record {} {
-    global null ft fb
-    set ns [Simulator instance]
-    set time 0.1
-    set now [$ns now]
-    set bw [$null set bytes_]
-    puts $ft "$now [expr $bw/$time*8/1000000]"
-    puts $fb "$now [expr $bw]"
-    $null set bytes_ 0
-    $ns at [expr $now + $time] "record"
-}
 
 # Creating nodes
 for {set i 0} {$i < 6} {incr i} {
@@ -52,14 +40,10 @@ $ns duplex-link $n(4) $n(5) 100Kb 10ms DropTail
 
 # Orienting links (not important)
 $ns duplex-link-op $n(0) $n(1) orient right
-$ns duplex-link-op $n(1) $n(2) orient right-down
-$ns duplex-link-op $n(0) $n(3) orient left-down
-$ns duplex-link-op $n(3) $n(4) orient right-down
-$ns duplex-link-op $n(4) $n(5) orient right
-$ns duplex-link-op $n(2) $n(5) orient left-down
+
 
 # Congestion control agents setup
-# Vegas, Reno, Newreno, Sack1
+# Vegas, Reno, Newreno, Sack
 # Tahoe is presented by "Agent/TCP"
 set tcp [new Agent/TCP]  ;# "Agent/TCP/Reno", "Agent/TCP/Vegas", etc.
 set null [new Agent/TCPSink]
@@ -70,6 +54,19 @@ $ns connect $tcp $null
 # App
 set http [new Application/Traffic/Exponential]
 $http attach-agent $tcp
+
+# record bandwidth and throughput
+proc record {} {
+    global null ft fb
+    set ns [Simulator instance]
+    set time 0.1
+    set now [$ns now]
+    set bw [$null set bytes_]
+    puts $ft "$now [expr $bw/$time*8/1000000]"
+    puts $fb "$now [expr $bw]"
+    $null set bytes_ 0
+    $ns at [expr $now + $time] "record"
+}
 
 # Schedule events
 $ns at 0.5 "record"

@@ -43,3 +43,5 @@ $ns at 4.9 "$ftp stop"
 $ns at 5.0 "finish"
 
 $ns run
+
+
