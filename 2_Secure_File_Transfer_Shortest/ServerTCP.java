@@ -10,6 +10,8 @@ class ServerTCP {
         System.out.println("connected");
         
         DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+
+        // maybe using datainputstream is okay
         BufferedReader dis1 = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Enter the path of the File:");

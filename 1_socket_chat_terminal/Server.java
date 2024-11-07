@@ -15,15 +15,15 @@ public class Server {
         DataInputStream dis = new DataInputStream(s.getInputStream());
         DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 
-        String re = " ";
-        String l = " ";
-        
-        while (!(re.equalsIgnoreCase("over"))) {
-            re = dis.readUTF();
-            System.out.println("Client:" + re);
+        String clientMessage = " ";
+        String my_reply = " ";
+
+        while (!(clientMessage.equalsIgnoreCase("over"))) {
+            clientMessage = dis.readUTF();
+            System.out.println("Client:" + clientMessage);
             System.out.println("Message:");
-            l = dat.readLine();
-            dos.writeUTF(l);
+            my_reply = dat.readLine();
+            dos.writeUTF(my_reply);
 
         }
     }

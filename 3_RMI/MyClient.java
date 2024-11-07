@@ -7,9 +7,10 @@ public class MyClient
 	{
 		try 	
 		{
-		String sName = "rmi://"+arg[0]+"/RMServer";
+		String sName = "rmi://localhost/RMServer";
 		
-		MyServerIntf asif = (MyServerIntf)Naming.lookup(sName);  // requesting remote objects on 							            // the server
+		// requesting remote objects on // the server
+		MyServerIntf asif = (MyServerIntf)Naming.lookup(sName);  
 			
 		int d1=2000,d2=500;
 
