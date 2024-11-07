@@ -3,9 +3,12 @@ import java.io.*;
 
 public class Client {
     public static void main(String args[]) throws Exception {
+
         Socket s = new Socket("localhost", 7777);
+
         DataInputStream dis = new DataInputStream(System.in);
         DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+        
         String l = " ";
         DataInputStream d = new DataInputStream(s.getInputStream());
         String re = " ";

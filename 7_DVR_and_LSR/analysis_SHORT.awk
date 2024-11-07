@@ -9,7 +9,6 @@ BEGIN {
     time = $2
     node_id = $3
     pkt_size = $6
-    level = $4
 
 if (event == "s") {
     if (time < startTime) {

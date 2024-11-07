@@ -17,6 +17,7 @@ public class Server {
 
         String re = " ";
         String l = " ";
+        
         while (!(re.equalsIgnoreCase("over"))) {
             re = dis.readUTF();
             System.out.println("Client:" + re);

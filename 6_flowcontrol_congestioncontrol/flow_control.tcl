@@ -11,6 +11,29 @@ $ns namtrace-all $nf
 set ft [open "Throughput" "w"]
 set fb [open "Bandwidth" "w"]
 
+# Creating fewer nodes
+for {set i 0} {$i < 3} {incr i} {
+    set n($i) [$ns node]
+}
+
+# Creating duplex links
+$ns duplex-link $n(0) $n(1) 1Mb 10ms DropTail
+$ns duplex-link $n(1) $n(2) 1Mb 10ms RED
+
+# HTTP traffic setup in main program
+set tcp [new Agent/TCP]
+set null [new Agent/TCPSink]
+$ns attach-agent $n(0) $tcp
+$ns attach-agent $n(2) $null
+$ns connect $tcp $null
+
+set http [new Application/Traffic/Exponential]
+$http attach-agent $tcp
+
+# Start and stop HTTP traffic
+$ns at 0.2 "$http start"
+$ns at 3.2 "$http stop"
+
 # Finish procedure to call nam and xgraph
 proc finish {} {
     global ns nf ft fb
@@ -37,29 +60,6 @@ proc record {} {
     $null set bytes_ 0
     $ns at [expr $now+$time] "record"
 }
-
-# Creating fewer nodes
-for {set i 0} {$i < 3} {incr i} {
-    set n($i) [$ns node]
-}
-
-# Creating duplex links
-$ns duplex-link $n(0) $n(1) 1Mb 10ms DropTail
-$ns duplex-link $n(1) $n(2) 1Mb 10ms RED
-
-# HTTP traffic setup in main program
-set tcp [new Agent/TCP]
-set null [new Agent/TCPSink]
-$ns attach-agent $n(0) $tcp
-$ns attach-agent $n(2) $null
-$ns connect $tcp $null
-
-set http [new Application/Traffic/Exponential]
-$http attach-agent $tcp
-
-# Start and stop HTTP traffic
-$ns at 0.2 "$http start"
-$ns at 3.2 "$http stop"
 
 # Scheduling events
 $ns at 0.5 "record"

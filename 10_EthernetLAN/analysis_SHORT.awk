@@ -14,8 +14,8 @@ BEGIN {
         filesize1 += $6
         endtime1 = $2
         latency = endtime1 - starttime1
-        bandwidth1 = filesize1 / latency
-        printf "%f %f\n", endtime1, bandwidth1 >> "file3.xg"
+        throughput = filesize1 / latency
+        #printf "%f %f\n", endtime1, throughput >> "file3.xg"
     }
 }
 

@@ -33,13 +33,7 @@ $ns node-config -adhocRouting $val(rp) \
                 -topoInstance $topo \
                 
 
-proc finish {} {
-    global ns f namtrace
-    $ns flush-trace
-    close $f
-    exec nam -r 5m complexdcf.nam &
-    exit 0
-}
+
 
 # Create 5 nodes
 for {set i 0} {$i < $val(nn)} {incr i} {
@@ -103,6 +97,15 @@ $ns at 20.0 "$cbr0 start"
 $ns at 20.0 "$cbr1 start"
 $ns at 800.0 "$cbr0 stop"
 $ns at 850.0 "$cbr1 stop"
+
+
+proc finish {} {
+    global ns f namtrace
+    $ns flush-trace
+    close $f
+    exec nam -r 5m complexdcf.nam &
+    exit 0
+}
 
 $ns at 900.0 "finish"
 $ns run
