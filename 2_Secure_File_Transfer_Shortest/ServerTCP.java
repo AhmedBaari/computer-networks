@@ -20,7 +20,7 @@ class ServerTCP {
         int ch;
 
         while ((ch = fr.read()) != -1) {
-            dos.writeUTF((char) ch + "");
+            dos.writeUTF((char) (ch+3) + "");
         }
         dos.writeUTF("end");
 

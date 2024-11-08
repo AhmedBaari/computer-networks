@@ -1,13 +1,13 @@
 set val(chan) Channel/WirelessChannel
-set val(prop) Propagation/TwoRayGround
 set val(netif) Phy/WirelessPhy
+set val(prop) Propagation/TwoRayGround
 set val(ant) Antenna/OmniAntenna
 set val(ll) LL
 set val(ifq) Queue/DropTail/PriQueue
 set val(ifqlen) 50
 set val(mac) Mac/802_11
 set val(nn) 5
-#set val(rp) AODV
+set val(rp) AODV
 
 set ns [new Simulator]
 set f [open trace.tr w]

@@ -9,7 +9,8 @@ public class DHCPServer {
         for (int i = 2; i <= 254; i++)
             availableIpAddresses.add("192.168.1." + i);
 
-        try (DatagramSocket socket = new DatagramSocket(4900)) {
+        try {
+            DatagramSocket socket = new DatagramSocket(4900);
             while (true) {
                 // Receive
                 byte[] receiveData = new byte[1024];
@@ -19,9 +20,10 @@ public class DHCPServer {
                 // Extract
                 InetAddress clientAddress = receivePacket.getAddress();
                 String allocatedIp = availableIpAddresses.remove(0);
-                byte[] responseData = ("Allocated IP: " + allocatedIp).getBytes();
-
+                
                 // Response 
+                byte[] responseData = ("Allocated IP: " + allocatedIp).getBytes();
+                
                 DatagramPacket responsePacket = new DatagramPacket(responseData, responseData.length, clientAddress,
                         receivePacket.getPort());
                 socket.send(responsePacket);
